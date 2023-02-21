@@ -48,6 +48,8 @@ from bosdyn.util import seconds_to_duration
 from google.protobuf.duration_pb2 import Duration
 from google.protobuf.timestamp_pb2 import Timestamp
 
+from bosdyn.api.spot import robot_command_pb2 as spot_command_pb2 
+
 front_image_sources = [
     "frontleft_fisheye_image",
     "frontright_fisheye_image",
@@ -366,7 +368,8 @@ class SpotWrapper:
         self._keep_alive = True
         self._valid = True
 
-        self._mobility_params = RobotCommandBuilder.mobility_params()
+        # self._mobility_params = RobotCommandBuilder.mobility_params()
+        self._mobility_params = spot_command_pb2.MobilityParams()
         self._is_standing = False
         self._is_sitting = True
         self._is_moving = False
@@ -645,7 +648,8 @@ class SpotWrapper:
         Resets the mobility parameters used for motion commands to the default values provided by the bosdyn api.
         Returns:
         """
-        self._mobility_params = RobotCommandBuilder.mobility_params()
+        # self._mobility_params = RobotCommandBuilder.mobility_params()
+        self._mobility_params = spot_command_pb2.MobilityParams()
 
     def robotToLocalTime(self, timestamp):
         """Takes a timestamp and an estimated skew and return seconds and nano seconds in local time
